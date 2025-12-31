@@ -1,0 +1,140 @@
+Find common elements in String array - CommonElementsInStringArray
+Logic:
+Iterate the two array in each for loop 
+Add to a set to remove duplicates if elements of each array is same while iterating
+
+Second highest/largest number in a array with duplicates - LargestNumberInArray
+Logic for without duplicates:
+Compare the first two elements of the array
+If the first element is greater than the second swap them.
+Then, compare 2nd and 3rd elements if the second element is greater than the 3rd swap them.
+Repeat this till the end of the array.
+After sorting an array print the third element from the end of the array.
+
+Logic for with duplicates: - LargestNumberInArray
+Initialize variable for first and second.
+Iterate the array accross it length.
+If element from array is greater than first then assign first to second and element value to first
+else if element from array is greater than second and not equal to first then assign element value to second
+first is largest num and second is second largest num
+
+Find count/print of repeative/non repeative duplicate letters in a string
+
+Given a string "abcaabcabcaabbabc". - FrequencySubstring
+Find the no.of  occurences for all the sequences.
+For ex:- abc- 3 times
+         aa - 2 times
+         bca- 3 times
+
+Given a string "aaabbccfddccb". - CountCharactersInString
+Find the no.of  occurences for all the characters.
+For ex:- a-3,b-2,c-2,f-1,d-2,c-2,b-1
+
+Given a string "aaabbccfddccb". - CountCharactersInString
+Find the no.of  occurences for all the characters.
+For ex:- a-3,b-3,c-4,f-1,d-2
+
+Given a string "a1b2c3d4e5". - CountCharactersInString
+Seperate Letters and Numbers from a string
+For ex:- ["abcde","12345"]
+
+Write a program to remove white spaces from a string - RemoveWhiteSpacesInString
+
+Odd or Even without modulus - OddOrEven
+		 
+input: [apple,ball,cat,dog],2,dog output: 1
+input: [aaa,bbb,ccc,ddd,eee],1,eee output: 2
+
+String s1 = "Vishnu"
+String s2 = "Vishnu"
+s1==s2
+s1.equals(s2)
+How many objects created?
+
+Write a program to group anagrams - ValidateAndGroupAnagrams
+Write a program to validate anagrams -  ValidateAndGroupAnagrams
+
+Sort Hashmap by Value - ScenarioBasedCollectionQuestions
+Sort Hashmap by Key - ScenarioBasedCollectionQuestions
+Store Employee in a hashmap,Hashset and List with out duplicates - ScenarioBasedCollectionQuestions
+
+Swap two numbers without any temp variable - SwapNumbers
+a=a+b;
+b=a-b;
+a=a-b;
+
+design a api that will take both xml and json as input
+write a program for runtime and compiletime polymorphism in java
+write custom functional interface
+Write Singleton class
+Create Custom function interface and use in main method with lambda expression
+
+Longest Palindrome in a string
+Find number of palindromes in a string
+Find Duplicates in a string
+Find first Duplicates charcters in a string
+Read and Write a IO Stream to string in java
+Create a immutable class with mutable object like Date
+Find smallest missing number in array
+Implement Rest API to update a resource
+Patterns Number, Special Characters and Alphabet patterns
+Store Employee in a map with out duplicates
+Move all zeroes to end of an array
+Largest/Maximun sum of continuous subarray | Kadane's Algorithm
+Find the length of longestsubstring without repeating charaters
+All permutation of a string
+Java coding Question to test Arrays and String knowledge:
+Find the average in each subjects
+Input: String[] str = {"1-English:45","2-English:45","1-Hindi:60","1-Hindi:90"};
+Output: Hindi: 75, English: 45
+Reverse a linked list
+Replace array elements
+Input: Integer numArrays[] = { 8, 9, 5, 11, 6, 1, 7, 6 };
+Output: { 11, 11, 11, -1, 7, 7, -1, -1 };
+Recursive function to reverse a string ( coding question)
+StringJoiner
+input = [1,1,2,3,3,4,4,5,7,7], By iterating only once find the non repeating number
+Iterate List<List<String>>
+
+
+Write a program to shift all the 0's at front followed by 1's
+find the nth node from last in Linked List (constraint :size cant be found)
+write a program to find the max length of palindromic substring in a string. (Dynamic programming- indeed challenging if you don't know it )
+find the kth smallest element in an array without sorting it (hint :use max heap-Priority queues)
+
+Rest API:
+Implement get, post,put an use Java 8 to filter from get method
+Implement POST, GET , PUT api, like creating the Employee, updating the employee and getting the employee and sort by name and age
+
+Stream Questions:
+Find the count of vowels and count of each charcters in a string - StreamsOnString
+Logic Vowels Count: convert string to char and use filter with the vowels and return the element and use count 
+Logic : convert string to char and use maptoobject with the char and collect by group by the element and use Collectors counting (returns map) 
+
+Filter Employees and return count and employee list with respect to - StreamsInterviewQuestions
+1) Gender
+2) Department
+3) Highest Salaried employee
+4) Second Highest Salaried employee
+
+Sort Employee by department,then age and salary
+
+Employee age greater than 25/ salary greater than 10000 -> map
+
+Program given a string, find words starting with "A" and collect them in a array using streams - StreamsOnString
+
+Find First Repeated and Non-Repeated Character of a string
+
+Sort Employee using salary if salary is same sort with name
+Find Duplicate words in a string and their count
+Create custom interface and use it in main method with lambda expression
+Find second/third highest/largest element in array 
+https://www.youtube.com/watch?v=d_efuW25ygc
+https://www.youtube.com/watch?v=d_efuW25ygc&t=507s
+https://www.youtube.com/watch?v=0z_kyaPqpYk
+https://medium.com/@veenaraofr/java8-stream-api-commonly-asked-questions-about-employee-highest-salary-99c21cec4d98
+
+SQL:
+Second Highest salary
+Third Highest salary 
+Maximaum salary in a department

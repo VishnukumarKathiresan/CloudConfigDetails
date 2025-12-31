@@ -1,0 +1,120 @@
+Microservices:
+Service Registry:
+Database used to keep track of the available instances of each microservice in an application. Centralized and maintains/have details about all the Microservices (Status,Port,URL).
+Connect with Microservice name
+Dependency: Spring Cloud Netflix Eureka Server
+Annotation: @EnableEurekaServer
+Application Config Changes:
+spring.application.name=EurekaServerName
+server.port=5555
+eureka.client.fetch-registry=false
+eureka.client.register-with-eureka=false
+
+Service Discovery Client:
+Dependency: Spring Cloud Starter Netflix Eureka Client
+Annotation: @EnableEurekaClient
+Application Config Changes:
+spring.application.name=ClientMSName
+server.port=8181
+eureka.client.service-url.defaultZone=http://localhost:5555/eureka 
+eureka.instance.hostname=localhost
+
+Feign Client: Declarative HTTP Framework used for implementig Rest Clients
+Dependency: Spring Cloud Starter Openfeign, Eureka Client
+Annotation: @EnableFeignClients, @FeignClient
+Feign Client Interface Class: @FeignClient(value = <"Microservice Name as per Eureka">, url = ConstantUtils.BOOK_REST_URL)
+and you can use multiple annotations with respect to your Microservice and create a method present in connecting Microservice.
+Implement the interface by autowiring the FeignClient class and create a request mapping.
+
+To Run Multiple Instance:
+server.port=0
+eureka.instance.instance-id=${spring.application.name}:${spring.application.instance_id:${random.value}} in the config while creating instance
+
+API Gateway: Based on the URL pattern the API Gateway will traverse the request from the user 
+Dependency: Cloud Gateway,Eureka Client and Actuator
+Annotation: @EnableEurekaClient
+Application Config Changes:
+spring.application.name=CloudGateWay
+server.port=8182
+spring.cloud.gateway.routes[0].id=pgService
+spring.cloud.gateway.routes[0].uri=http://localhost:2005/
+spring.cloud.gateway.routes[0].predicates[0]=Path=/employee/**
+spring.cloud.gateway.routes[1].id=inMateService
+spring.cloud.gateway.routes[1].uri=http://localhost:2006/
+spring.cloud.gateway.routes[1].predicates[0]=Path=/consumer/**
+
+Circuit Breaker : Identify the Microservices not running or down and kick start a fallback method to inform other services that the particular microservices is not working
+Dependency: Hystrix Circuit Breaker
+Annotation: @EnableHysrix
+Write an fallback method in controller class with a requestmapping 
+Application Config Changes:
+spring.cloud.gateway.routes[0].filters[0]=name=CircuitBreaker
+spring.cloud.gateway.routes[0].filters[0]=fallbackuri: forward:/userServiceFallBack
+hystrix.command.default.circuitBreaker.requestVolumeThreshold=4
+hystrix.command.default.metrics.rollingStats.timeInMilliseconds=10000
+hystrix.command.default.circuitBreaker.errorThresholdPercentage=30
+hystrix.command.default.circuitBreaker.sleepWindowInMilliseconds=30000
+
+Hytrix Dashboard: To maintain and monitor health of Microservses via Dashboard
+Dependency: Hystrix Dashboard and Eureka Client
+Annotation: @EnableHystrixDashboard
+Application Config Changes:
+hystrix.dashboard.proxy-stream-allow-list=localhost
+
+Check Hystrix Steam is working :
+Localhost URL/actuator/hystrix.stream
+
+SpringClouldConfig: Common Config server to get the config properties from Github and get when needed.
+Dependency: Config Server ,Eureka Client and Spring Boot Actuator
+Annotation : @EnableConfigServer
+Application Config Changes:
+spring.cloud.config.server.git.uri= https://github.com/VishnukumarKathiresan/config-details
+management.endpoints.web.exposure.include=* - Test using the actuator url http://localhost:8888/{spring.application.name}/{profile}
+If you not use git repo and add the properties({spring.application.name}-{profile}.properties) into a config folder of config server resources use the below 
+spring.profiles.active=native
+Client Cloud Config:
+Dependency:  Spring Cloud Starter Config in all the clients
+BootStrap application Config Changes:
+spring.config.import=optional:configserver:http://localhost:8888
+If you not use git repo, after adding the all microservices properties into a config folder of config server resources use the below to the all the config clients
+spring.config.import=optional:configserver:http://localhost:8888
+
+Zipkin and Sleuth: Trace the log and errrors/requests in microservices
+Traceid - Unique accross the request in all Microservices for that one request
+Span ID - Differenrt for Each and very Microservices
+
+Zipkin Server : https://zipkin.io/
+Downoad zipkin jar 
+java -jar <Zipkin jar file>
+(or)
+docker run -d -p 9411:9411 openzipkin/zipkin
+
+Dependency : Spring Cloud Starter Zipkin and Sleuth 
+Application Config Changes:
+spring.zipkin.base-url=http://localhost:9411
+(or)
+Dependency : Zipkin (Micrometer Tracing Bridge Brave and Zipkin reporter brave)
+Application Config Changes:
+management.tracing.sampling.probability=1.0
+
+Microservices using SB - https://www.youtube.com/watch?v=BnknNTN8icw
+Microservices using SB-3.0 - https://www.youtube.com/watch?v=HFl2dzhVuUo&t=29s
+SpringBoot Mastercourse with spring security- https://www.youtube.com/watch?v=zvR-Oif_nxg&ab_channel=DailyCodeBuffer
+https://www.baeldung.com/registration-with-spring-mvc-and-spring-security
+
+OAuth2.0:
+Open Authorization. Design to allow a website or application to access the resources hosted by other applications on behalf of an user.
+
+Resource Owner: 
+User/System that owns the protected resources and can grant access to them.
+
+Client:
+System that requires access to the protected resources. It need Access token to access the protected resources.
+
+Authorization Server:
+Server recieves requests from client for Access tokens and issuses then after authentication with the owner.
+
+Resource Owner:
+Server that protects the user resources and recieve Access request from client. It accepts and validates the Accesstoken and return appropriate resouses to it.
+
+Scopes: Specify exactly the reason for which access to resources may be granted. (Like Admin and User)

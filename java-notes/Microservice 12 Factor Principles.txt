@@ -1,0 +1,45 @@
+Microservies 12 Factor Application Principles
+
+Single Codebase - Code Versioning
+- Use seperate repo for each microservices
+
+Explicit Principles: Explicitly declare and isolate dependencies
+- Keep the dependencies isolated by declaring using pom.xml or build.gradle application
+- So the microsrevices can be deployed consistently(same version) in multiple environments
+
+Externally Managed Config: Store Configuration in Environmental variable
+- Should not hard code configs in the java classes and need to inect using env variables
+
+Backing Services: Treat Backing services as attached services
+- Use Backing services like DB, Queues, Cache as detachable using the url (dburl, driverclass)
+
+Build, Release, Run phases: Strictly seperate Build and Run Phases
+- Isolate all the phases with each other so code changes should not be done in runtime
+
+Stateless Process: Stateless and shares nothing
+- Nothing should be changed in the Server/Clients disks and always should be done in DB's
+
+Port Bindings: Export services by tying ports
+- Create Self contained Microservies so scaling will be easily done
+- Server attached with Microservices and not require seperate deploying servers
+
+Concurrency: Scale with process model
+- Horizondal Scaling - Increase Num of Server Instances
+- Vertical Scaling - Increase Num of Ram,HDD, and instance of CPU
+
+Disposablility: Maximum robustness with faster startup and graceful shutdown
+- Graceful shutdown - Shutdown the app after complete executing tasks
+
+Dev/Prod Parity: Keep DEV,TST,PRD as similar as possible
+- Can be acheived using Docker 
+- Dev to Prd commit time should be less
+- Dev should Development and Deploy the app(Devops)
+
+Logs: Treat logs as event streams
+- Dont save logs in the server in which the Microservices is deployed
+- Save logs in Centralized Servers(New Relic)
+
+Admin Process: Report Generation Process
+- Dont trigger manually and trigger automatically by scripts and place in the app code repo
+
+

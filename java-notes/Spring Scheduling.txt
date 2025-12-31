@@ -1,0 +1,94 @@
+Batch Jobs
+
+@EnableScheduling - Class or Application Level - Used to enable the scheduler for your application
+
+@Scheduled - Used to trigger the scheduler for a specific time period
+
+Reference Link for Corn jobs: https://docs.oracle.com/cd/E12058_01/doc/doc.1014/e12030/cron_expressions.htm
+
+Fixed Delay: 
+The fixedDelay property makes sure that there is a delay of n millisecond between the finish time of an execution of a task and the start time of the next execution of the task.
+
+This property is specifically useful when we need to make sure that only one instance of the task runs all the time. For dependent jobs, it is quite helpful.
+
+InitialDelay:
+The time after which the task will be executed the first time after the initial delay value
+
+FixedRate:
+The fixedRate property runs the scheduled task at every n millisecond. It doesn't check for any previous executions of the task.
+
+This is useful when all executions of the task are independent. If we don't expect to exceed the size of the memory and the thread pool, fixedRate should be quite handy.
+
+But, if the incoming tasks do not finish quickly, it's possible they end up with “Out of Memory exception”.
+
+***************************************************Example***************************************************
+
+/**
+ * Fixed Delay: Always waits until previous one is completed. 
+ * Fixed delay is between the end of previous and start of the current task.
+ *
+ * @throws InterruptedException
+ */
+@Scheduled(fixedDelay = 1000)
+public void scheduleFixedDelayTask() throws InterruptedException {
+    logger.info("Fixed delay task - " + (++i) + " " + sdf.format(new Date()));
+}
+
+/**
+ * Initial Delay: The task will be executed the first time after the initial delay.
+ * Start 2000ms after application start
+ */
+@Scheduled(initialDelay = 2000, fixedDelay = 1000)
+public void scheduleFixedDelayWithInitialDelayTask() throws InterruptedException {
+    logger.info("Fixed delay with initial delay task - " + (++i) + " " + sdf.format(new Date()));
+}
+
+/**
+ * Fixed Rate: Run tasks in fixed intervals.
+ * Tasks not run in parallel by default, so waits until previous one is completed.
+ *
+ * @throws InterruptedException
+ */
+
+@Scheduled(initialDelay = 2000, fixedRate = 1000)
+public void scheduleFixedRateTask() throws InterruptedException {
+    logger.info("Fixed rate task - " + (++i) + " " + sdf.format(new Date()));
+    Thread.sleep(2000);
+    logger.info("Job finished - " + (++j) + " " + sdf.format(new Date()));
+}
+
+/**
+ * Fixed Rate with Async: Run tasks in fixed intervals in parellel.
+ *
+ * @throws InterruptedException
+ */
+@Async
+@Scheduled(initialDelay = 2000,fixedRate = 1000)
+public void scheduleFixedRateAsyncTask() throws InterruptedException {
+    logger.info("Fixed rate async task - " + (++i) + " " + sdf.format(new Date()));
+    Thread.sleep(2000);
+    logger.info("Job finished - " + (++j) + " " + sdf.format(new Date()));
+}
+
+Reference Link: https://stackoverflow.com/questions/38842507/whats-the-difference-between-fixed-rate-and-fixed-delay-in-spring-scheduled-ann
+
+/**
+ * Corn Scheduler runs on specific time
+ *
+ */
+@Scheduled(cron = "0 0 9 * * ?")
+    public void sendEmailTask() {
+        System.out.println("Sending email to clients...");
+        // Implement email sending logic here
+    }
+
+second (0-59)
+minute (0-59)
+hour (0-23)
+day of month (1-31)
+month (1-12)
+day of week (0-6 where 0 is Sunday)
+
+@Scheduled(cron = "0 0 9 * * ?", zone = "Asia/Kolkata") - With Zone
+
+
