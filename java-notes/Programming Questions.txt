@@ -63,12 +63,6 @@ a=a+b;
 b=a-b;
 a=a-b;
 
-design a api that will take both xml and json as input
-write a program for runtime and compiletime polymorphism in java
-write custom functional interface
-Write Singleton class
-Create Custom function interface and use in main method with lambda expression
-
 Longest Palindrome in a string
 Find number of palindromes in a string
 Find Duplicates in a string
@@ -103,8 +97,21 @@ write a program to find the max length of palindromic substring in a string. (Dy
 find the kth smallest element in an array without sorting it (hint :use max heap-Priority queues)
 
 Rest API:
-Implement get, post,put an use Java 8 to filter from get method
-Implement POST, GET , PUT api, like creating the Employee, updating the employee and getting the employee and sort by name and age
+Implement  
+- Create Employee(POST), 
+- Get Employee and Sort by name and age(GET),
+- Get Employess using JDK8 Filters Methods(GET),
+- Update Employee(PUT and PATCH)
+- Accepts and Produces Both XML and JSON
+- Consume Multipart File
+- Use Custom Validation with Annotaion for Employee Object
+- Use Spring JDBC with ResultSetExtractor and RowMapper
+
+Write a program for runtime and compiletime polymorphism in java
+Write Singleton class
+Create Custom function interface and use in main method with lambda expression
+LRU Cache
+Security with Filters, Basic Authentication, JWT and Oauth2
 
 Stream Questions:
 Find the count of vowels and count of each charcters in a string - StreamsOnString
@@ -118,11 +125,8 @@ Filter Employees and return count and employee list with respect to - StreamsInt
 4) Second Highest Salaried employee
 
 Sort Employee by department,then age and salary
-
 Employee age greater than 25/ salary greater than 10000 -> map
-
 Program given a string, find words starting with "A" and collect them in a array using streams - StreamsOnString
-
 Find First Repeated and Non-Repeated Character of a string
 
 Sort Employee using salary if salary is same sort with name
